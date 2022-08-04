@@ -42,7 +42,6 @@ let countDown2 = setInterval(loseHygenie, 2000);
 // pet loses hunger gradually every 4 seconds
 let countDown3 = setInterval(loseHunger, 4000);
 
-
 function loseAffection() {
     if(affection == 39) {
     console.log(` ${response.getName} is losing affection`);
