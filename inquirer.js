@@ -3,7 +3,8 @@ import inquirer from 'inquirer';
 let actions = {
     play:'',
     feed: '',
-    pet: ''
+    pet: '',
+    clean: ``
 };
 
 
@@ -24,16 +25,16 @@ async function ask (){
     
     const response = await inquirer.prompt(questions);
     console.log(`you chose to ${response.action}`)
-    if(response.action == "playStat"){
+    if(response.action == "play"){
         checkplayStat();
     }
-    else if(response.action){
+    else if(response.action == "feed"){
         
     }
     
 }
 
-
+// checks if pet has played
 function checkplayStat(){
     if(playStat < 100 && affection > 0){
         console.log("you playStated with the pet");
@@ -43,32 +44,26 @@ function checkplayStat(){
         console.log(playStat);   
         ask()       
     }
-    else if(playStat >= 100 && affection > 0 ){
-        // console.log("you playStated with the pet");
-        // affection += 10;
-        // playStat += 20;
-        // hygiene -= 10;
-        // console.log(playStat);
-        // ask()                  
-        console.log("doesn't want to playStat")
+    else if(playStat >= 100 && affection > 0 ){            
+        console.log("doesn't want to play")
         affection -= 10
         console.log(playStat);
         console.log(`Affection ${affection}`);
         ask()
     }
     else if(affection <= 0 ){
-        console.log("pet ran away")
+        console.log(`affection: ${affection} so the pet ran away`)
     }
     else{
         console.log("error")
     };
 }
+// add more functions for each stat
 
 
 
 
-
-
+// starts question
 ask()
 
 
