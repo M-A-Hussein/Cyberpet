@@ -27,7 +27,10 @@ async function ask (){
     if(response.action == "playStat"){
         checkplayStat();
     }
-    else if(response.action)
+    else if(response.action){
+        
+    }
+    
 }
 
 
@@ -70,18 +73,6 @@ ask()
 
 
 
-// let petHappy = 100;
-// let petClean = 100;
-// let petHunger = 100;
-
-// function addHappyPoints() {
-//         if(petHappy<=99&&petHappy!=0){
-//             petHappy += 20;
-//         }
-//         else if(petHappy==0){
-//             petHappy+=0;
-//         }
-//     }
 
 
 
