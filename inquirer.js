@@ -196,14 +196,59 @@ function gameOver (){
 };
 
 ask();
+checkMax();
 
-checkMax(petChosen.affection);
-checkMax(`affection`)
-function checkMaxAffection(petChosen){
-    if (petChosen.check >= 100) {
-        petChosen.check = 100;
-    }
+
+// Function to CheckMax everywhere
+const CheckMax = () =>{
+    function checkMaxHunger(){
+        if (petChosen.hunger >= 100) {
+            petChosen.hunger = 100;
+        }
+        else if(petChosen.hunger <= 0){
+            petChosen.hunger = 0;
+        }
+    };
+    function checkMaxAffection(){
+        if (petChosen.affection >= 100) {
+            petChosen.affection = 100;
+        }
+        else if(petChosen.affection <= 0){
+            petChosen.affection = 0;
+        }
+    };
+    function checkMaxHygiene(){
+        if (petChosen.hygiene >= 100) {
+            petChosen.hygiene = 100;
+        }
+        else if(petChosen.hygiene <= 0){
+            petChosen.hygiene = 0;
+        }
+    };
+    function checkMaxPlay(){
+        if (petChosen.play >= 100) {
+            petChosen.play = 100;
+        }
+        else if(petChosen.play <= 0){
+            petChosen.play = 0;
+        }
+    };
+    function checkMaxPet(){
+        if (petChosen.pet >= 100) {
+            petChosen.pet = 100;
+        }
+        else if(petChosen.pet <= 0){
+            petChosen.pet = 0;
+        }
+    };
+    // calls all functions
+    checkMaxHunger();
+    checkMaxAffection();
+    checkMaxHygiene();
+    checkMaxPlay();
+    checkMaxPet();
 }
+
 
 
 
