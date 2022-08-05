@@ -1,5 +1,38 @@
 import inquirer from 'inquirer';
 
+class Animal {
+    constructor(name) {
+        this.name = name;
+        this.hunger = 100;
+        this.affection = 60;
+        this.hygiene = 100;
+        this.play = 70;
+        this.pet = 50;
+    }
+}
+
+class Dog extends Animal {
+    constructor(name) {
+        //Dog specific properties here
+        super (name);
+    }
+}
+
+
+class Cat extends Animal {
+    constructor(name) {
+        super(name);
+    }
+}
+
+// sets empty variable
+let petChosen = ""
+
+petChosen = new Cat("Dan")
+
+console.log(petChosen.affection)
+
+
 
 let actions = {
     play:'',
@@ -8,11 +41,6 @@ let actions = {
     clean: ``
 };
 
-
-let playStat = 60;
-let affection = 50;
-let hygiene = 50;
-let hunger = 50;
 
 async function ask (){
     const questions = [
@@ -50,19 +78,21 @@ async function ask (){
 
 // checks if pet has played
 function checkplayStat(){
-    if(playStat < 100){
-        console.log("you play with the pet");
-        affection += 10;
-        playStat = 100;
-        hygiene -= 20;
-        console.log(playStat);   
+    if(petChosen.play < 100){
+        console.log("You have played with the pet");
+        console.log(`+20 Play  +10 Affection  -10 Pet  -10 Hygiene  -10 Hunger`);
+        petChosen.affection += 10;
+        petChosen.pet -= 10;
+        petChosen.play += 20;
+        petChosen.hygiene -= 20;
+        console.log(petChosen.play);   
         ask();       
     } 
-    else if(playStat >= 100){            
+    else if(petChosen.play >= 100){            
         console.log("doesn't want to play");
-        affection -= 10;
-        console.log(playStat);
-        console.log(`Affection ${affection}`);
+        petChosen.affection -= 10;
+        console.log(petChosen.play);
+        console.log(`Affection ${petChosen.affection}`);
         ask();
     }
     else{
@@ -73,20 +103,21 @@ function checkplayStat(){
 // add more functions for each stat
 //feed things that are going to change are - hunger / affection
 function checkFeedStat () {
-    if(hunger < 100){
+    if(petChosen.hunger < 100){
+        console.log(`+20 Pet +10 Affection  -10 Play -10 Hygiene -10 Hunger`);
         console.log("you have fed the pet");
         console.log('It is now full');
-        affection += 10;
-        hunger = 100;
-        hygiene -= 10;
-        console.log(hunger);   
+        petChosen.affection += 10;
+        petChosen.hunger += 20;
+        petChosen.hygiene -= 10;
+        console.log(petChosen.hunger);   
         ask();       
     }
-    else if(hunger >= 100){            
+    else if(petChosen.hunger >= 100){            
         console.log("Doesn't want to eat");
-        affection -= 10
-        console.log(hunger);
-        console.log(`Affection ${affection}`);
+        petChosen.affection -= 10;
+        console.log(petChosen.hunger);
+        console.log(`Affection ${petChosen.affection}`);
         ask();
     }
     else{
@@ -96,20 +127,25 @@ function checkFeedStat () {
 
 //feed things that are going to change are - affection /hygiene
 function checkPetStat(){
-    if( affection < 100){
+    if(petChosen.pet < 100){
+        console.log(`+20 Pet  +10 Affection  -10 Play  -10 Hygiene  -10 Hunger`);
         console.log("You have petted your pet");
-        console.log('It is now Happy');
-        affection = 100;
-        playStat -= 10
-        hygiene -= 10;
-        console.log(affection);   
+        petChosen.affection += 10;
+        petChosen.play -= 10;
+        petChosen.hygiene -= 10;
+        petChosen.hunger -=10;
+        petChosen.pet +=20;
+        console.log(petChosen.affection);   
         ask();
     }
-    else if(affection >= 100){            
+    else if(petChosen.pet >= 100){            
         console.log("Doesn't want to be petted anymore");
-        affection -= 10;
-        console.log(affection);
-        console.log(`Hygiene ${hygiene}`);
+        petChosen.affection -= 10;
+        petChosen.hunger -=10;
+        petChosen.play -= 10
+        petChosen.hygiene -= 10;
+        console.log(petChosen.affection);
+        console.log(`Hygiene ${petChosen.hygiene}`);
         ask();
     }
     else{
@@ -117,22 +153,24 @@ function checkPetStat(){
     }
 };
 
-//feed things that are going to change are - hygiene / playStat
+//feed things that are going to change are - hygiene / play
 function  checkCleanStat(){
-    if( hygiene < 100){
+    if(petChosen.hygiene < 100){
+        console.log(`+20 Hygiene -10 Affection  -10 Play -10 Hygiene -10 Hunger`);
         console.log("You have cleaned your pet");
         console.log('Pet is now Germ Free');
-        affection -= 10;
-        playStat -= 10
-        hygiene = 100;
-        console.log(hygiene);   
+        petChosen.affection -= 10;
+        petChosen.play -= 10
+        petChosen.hygiene += 20;
+    
+        console.log(petChosen.hygiene);   
         ask();
     }
-    else if(hygiene >= 100){            
+    else if(petChosen.hygiene >= 100){            
         console.log("Doesn't want to be cleaned again");
-        affection -= 10;
-        console.log(hygiene);
-        console.log(`Play ${playStat}`);
+        petChosen.affection -= 10;
+        console.log(petChosen.hygiene);
+        console.log(`Play ${petChosen.play}`);
         ask();
     }
     else{
@@ -141,21 +179,32 @@ function  checkCleanStat(){
 };
 
 function failConditions (){
-   if (hygiene == 0){
-        affection -= 30;
+   if (petChosen.hygiene == 0){
+    petChosen.affection -= 30;
     }
-    else if(playStat == 0){
-        affection -= 30;
+    else if(petChosen.play == 0){
+        petChosen.affection -= 30;
     }
 };
 
 function gameOver (){
-    if ( hunger == 0){
+    if ( petChosen.hunger == 0){
         console.log('Pet has died');
-    }else if (affection == 0){
+    }else if (petChosen.affection == 0){
         console.log(`Your pet has ran away`);
     }
 };
 
 ask();
+
+checkMax(petChosen.affection);
+checkMax(`affection`)
+function checkMaxAffection(petChosen){
+    if (petChosen.check >= 100) {
+        petChosen.check = 100;
+    }
+}
+
+
+
 
